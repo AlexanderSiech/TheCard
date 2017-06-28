@@ -1,6 +1,6 @@
 
 
-package com.mah.ae7768.thecard;
+package com.mah.ae7768.thecard.Activites;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,11 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.mah.ae7768.thecard.ImageRequester;
+import com.mah.ae7768.thecard.Photo;
+import com.mah.ae7768.thecard.R;
+import com.mah.ae7768.thecard.RecyclerAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
