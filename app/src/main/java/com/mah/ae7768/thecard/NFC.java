@@ -5,4 +5,6 @@ package com.mah.ae7768.thecard;
  */
 
 public class NFC {
+    private NFC tag;
+    
 }
