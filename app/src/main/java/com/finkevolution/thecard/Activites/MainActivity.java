@@ -13,7 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.finkevolution.thecard.ImageRequester;
+import com.finkevolution.thecard.Objects.Card;
 import com.finkevolution.thecard.Objects.Shop;
+import com.finkevolution.thecard.Objects.User;
 import com.finkevolution.thecard.Photo;
 import com.finkevolution.thecard.R;
 import com.finkevolution.thecard.RecyclerAdapter;
@@ -50,6 +52,18 @@ public class MainActivity extends AppCompatActivity implements ImageRequester.Im
         for(int i=0; i<test.getOpenHours().getSize(); i++){
            System.out.println(test.getOpenHours().getDayAtIndex(i).getDayOfWeek() + " - " + test.getOpenHours().getDayAtIndex(i).getOpenHours());
         }
+
+        User Mohee = new User("Mohee","FaceBook");
+        Mohee.addCard(new Card(test,0,false));
+
+        for(int y = 0 ; y<Mohee.getCardQuantity(); y++){
+            System.out.println(Mohee.getCardIndex(y).getShop().getName());
+        }
+
+        Mohee.removeCard("Kebab");
+
+        System.out.println("Amount: " + Mohee.getCardQuantity());
+
         //initilize();
     }
 

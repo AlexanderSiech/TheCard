@@ -27,4 +27,19 @@ public class User {
         }
     }
 
+    public Card getCardIndex(int i){
+        return usersCards.get(i);
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public int getCardQuantity(){
+        return usersCards.size();
+    }
 }

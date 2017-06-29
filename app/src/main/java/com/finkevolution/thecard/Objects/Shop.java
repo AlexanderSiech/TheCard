@@ -7,7 +7,7 @@ import com.mongodb.gridfs.GridFSDBFile;
  */
 
 public class Shop {
-    String id,name,address,url,phone,offer;
+    String id,name,address,url,phone, cardDescription;
     int stampcount;
     LatLong pos;
     OpenHours openHours;
@@ -42,8 +42,8 @@ public class Shop {
         this.phone = phone;
     }
 
-    public void setOffer(String offer){
-        this.offer = offer;
+    public void setCardDescription(String cardDescription){
+        this.cardDescription = cardDescription;
     }
 
     public void setStampcount(int stampcount){
@@ -90,8 +90,8 @@ public class Shop {
         return stampcount;
     }
 
-    public String getOffer() {
-        return offer;
+    public String getCardDescription() {
+        return cardDescription;
     }
 
     public String getUrl() {
