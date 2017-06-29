@@ -1,5 +1,8 @@
 package com.mah.ae7768.thecard.Objects;
 
+import com.mah.ae7768.thecard.Activites.MainActivity;
+import com.mah.ae7768.thecard.R;
+
 /**
  * Created by Girondins on 2017-06-29.
  */
@@ -20,6 +23,10 @@ public class Day {
     }
 
     public String getOpenHours(){
-        return this.openHours;
+        if(openHours != null){
+            return openHours;
+        }else{
+            return MainActivity.getContext().getString(R.string.closed);
+        }
     }
 }
