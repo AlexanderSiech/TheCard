@@ -1,7 +1,7 @@
-package com.finkevolution.ae7768.thecard.Objects;
+package com.finkevolution.thecard.Objects;
 
-import com.finkevolution.ae7768.thecard.Activites.MainActivity;
-import com.finkevolution.ae7768.thecard.R;
+import com.finkevolution.thecard.Activites.MainActivity;
+import com.finkevolution.thecard.R;
 
 /**
  * Created by FinkEvolution on 2017-06-29.

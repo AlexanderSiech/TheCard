@@ -3,9 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TheCard.iml" filepath="$PROJECT_DIR$/TheCard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TheCard.iml" filepath="$PROJECT_DIR$/TheCard.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mongodb-driver-3.4.2-javadoc/mongodb-driver-3.4.2-javadoc.iml" filepath="$PROJECT_DIR$/mongodb-driver-3.4.2-javadoc/mongodb-driver-3.4.2-javadoc.iml" />
       <module fileurl="file://$PROJECT_DIR$/mongodb-driver-3.4.2-javadoc/mongodb-driver-3.4.2-javadoc.iml" filepath="$PROJECT_DIR$/mongodb-driver-3.4.2-javadoc/mongodb-driver-3.4.2-javadoc.iml" />
     </modules>
   </component>

@@ -1,4 +1,4 @@
-package com.finkevolution.ae7768.thecard.Objects;
+package com.finkevolution.thecard.Objects;
 
 import com.mongodb.gridfs.GridFSDBFile;
 
@@ -13,7 +13,7 @@ public class Shop {
     OpenHours openHours;
     GridFSDBFile logo,stampImg,cardImg;
 
-    public void Shop(String id, String name){
+    public Shop(String id, String name){
         openHours = new OpenHours();
         this.id = id;
         this.name = name;

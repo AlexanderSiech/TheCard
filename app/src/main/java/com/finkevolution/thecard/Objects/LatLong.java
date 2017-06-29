@@ -1,4 +1,4 @@
-package com.finkevolution.ae7768.thecard.Objects;
+package com.finkevolution.thecard.Objects;
 
 /**
  * Created by FinkEvolution on 2017-06-29.

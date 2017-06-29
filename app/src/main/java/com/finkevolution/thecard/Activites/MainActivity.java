@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.finkevolution.thecard.ImageRequester;
+import com.finkevolution.thecard.Objects.Shop;
 import com.finkevolution.thecard.Photo;
 import com.finkevolution.thecard.R;
 import com.finkevolution.thecard.RecyclerAdapter;
@@ -42,8 +43,14 @@ public class MainActivity extends AppCompatActivity implements ImageRequester.Im
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MainActivity.context = getApplicationContext();
+        Shop test = new Shop("Kebab","Falafel");
+        test.setOpenHours("Öppet",null,"17:00","Öppet",null,"17:00","Öppet");
 
-        initilize();
+        System.out.println(test.getId() + test.getName());
+        for(int i=0; i<test.getOpenHours().getSize(); i++){
+           System.out.println(test.getOpenHours().getDayAtIndex(i).getDayOfWeek() + " - " + test.getOpenHours().getDayAtIndex(i).getOpenHours());
+        }
+        //initilize();
     }
 
     private void initilize() {
@@ -67,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements ImageRequester.Im
     @Override
     protected void onStart() {
         super.onStart();
-        requestPhoto(); // hämtar en bild
+       // requestPhoto(); // hämtar en bild
         //fixar i ImageRequester
     }
 
