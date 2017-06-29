@@ -5,12 +5,15 @@
   <string name="title_activity_fullscreen">FullscreenActivity</string>
   <string name="change_layout_manager">Change Layout</string>
 
-  <string name="monday">Monday</string>
-  <string name="tuesday">Tuesday</string>
-  <string name="wednesday">Wednesday</string>
-  <string name="thursday">Thursday</string>
-  <string name="friday">Friday</string>
-  <string name="saturday">Saturday</string>
-  <string name="sunday">Sunday</string>
+
+  //WEEKDAYS
+  <string name="monday">Måndag</string>
+  <string name="tuesday">Tisdag</string>
+  <string name="wednesday">Onsdag</string>
+  <string name="thursday">Torsdag</string>
+  <string name="friday">Fredag</string>
+  <string name="saturday">Lördag</string>
+  <string name="sunday">Söndag</string>
+  <string name="closed">Stängt</string>
 
 </resources>
