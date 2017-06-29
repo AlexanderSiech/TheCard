@@ -5,6 +5,10 @@
   <string name="title_activity_fullscreen">FullscreenActivity</string>
   <string name="change_layout_manager">Change Layout</string>
 
+  //Facebook
+  <string name="facebook_app_id">100398247267449</string>
+  <string name="fb_login_protocol_scheme">fb100398247267449</string>
+
 
   //WEEKDAYS
   <string name="monday">Måndag</string>
