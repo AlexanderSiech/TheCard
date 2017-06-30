@@ -35,6 +35,15 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'com.android.support:support-v4:25+'
     compile 'org.mongodb:mongodb-driver:3.4.0-beta1'
-
+    compile 'org.mongodb:stitch:0.1.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
+
+}
+
+repositories {
+
+    // TODO: Remove once BSON 3.5.0 is released
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
 }
