@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.telecom.Call;
 import android.util.Log;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -31,6 +32,8 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkLogin();
+
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
         setContentView(R.layout.activity_start);
@@ -39,6 +42,19 @@ public class StartActivity extends AppCompatActivity {
         fbLogin();
 
 
+    }
+
+    private void checkLogin() {
+        if(isLoggedIn()){
+            startActivity(new Intent(StartActivity.this, MainActivity.class));
+
+        }
+
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 
     private void initilize() {
