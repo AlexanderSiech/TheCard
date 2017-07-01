@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -28,7 +29,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'com.android.support:appcompat-v7:25.3.1'
+
+    compile 'com.android.support:appcompat-v7:25+'
+//Google
+    compile 'com.google.android.gms:play-services-auth:10.2.1'
+
+
+
+
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
 
     compile 'com.android.support:recyclerview-v7:25+'
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -38,7 +47,9 @@ dependencies {
     compile 'org.mongodb:stitch:0.1.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
 
+    compile 'com.android.support:mediarouter-v7:25+'
 }
+apply plugin: 'com.google.gms.google-services'
 
 repositories {
 

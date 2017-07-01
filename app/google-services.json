@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "725498744251",
+    "project_id": "firebase-klippkortet"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725498744251:android:bd6fee46632bd8f7",
+        "android_client_info": {
+          "package_name": "com.finkevolution.thecard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725498744251-21euqq8n7gpldfk72lt8o6lj0is5ujmq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.finkevolution.thecard",
+            "certificate_hash": "54329f4fb19746d811a5fef5f16bf68bdacb5c58"
+          }
+        },
+        {
+          "client_id": "725498744251-uj9th6334g8omipvve05ns0sism0mjla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeBAe_2b9WxqBkHrTk-c1B5zdvZALv5Cw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
