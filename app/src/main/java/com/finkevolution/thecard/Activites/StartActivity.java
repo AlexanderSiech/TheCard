@@ -162,12 +162,12 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
     private void updateUI(boolean signedIn) {
         if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+         //   findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
         } else {
            // mStatusTextView.setText(R.string.signed_out);
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+       //     findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
     }
 

@@ -29,14 +29,14 @@
         </activity>
 
         <activity android:name=".Activites.StartActivity">
+        </activity>
+        <activity android:name=".PhotoActivity"></activity>
+        <activity android:name=".Activites.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".PhotoActivity"></activity>
-        <activity android:name=".Activites.MainActivity"></activity>
 
     </application>
 

@@ -1,5 +1,6 @@
 package com.finkevolution.thecard.Objects;
 
+import com.finkevolution.thecard.Activites.MainActivity;
 import com.mongodb.gridfs.GridFSDBFile;
 
 /**
@@ -13,10 +14,15 @@ public class Shop {
     OpenHours openHours;
     GridFSDBFile logo,stampImg,cardImg;
 
-    public Shop(String id, String name){
+    int imgSource;
+
+    public Shop(String id, String name, String test){
         openHours = new OpenHours();
         this.id = id;
         this.name = name;
+
+        imgSource = MainActivity.getContext().getResources().getIdentifier(test, "drawable", MainActivity.getContext().getPackageName());
+
     }
 
     public void setOpenHours(String monday, String tuesday , String wednesday,
@@ -112,6 +118,10 @@ public class Shop {
 
     public String getId() {
         return id;
+    }
+
+    public int getImageSource(){
+        return imgSource;
     }
 
 }
