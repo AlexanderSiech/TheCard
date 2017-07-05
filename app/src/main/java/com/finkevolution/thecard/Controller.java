@@ -2,6 +2,7 @@ package com.finkevolution.thecard;
 
 import com.finkevolution.thecard.Objects.Shop;
 import com.finkevolution.thecard.Objects.User;
+
 import com.finkevolution.thecard.TestClasses.ShopTest;
 import com.finkevolution.thecard.TestClasses.TestRunner;
 import com.finkevolution.thecard.TestClasses.UserTest;

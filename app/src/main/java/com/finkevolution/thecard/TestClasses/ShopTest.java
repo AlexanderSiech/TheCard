@@ -16,7 +16,7 @@ public class ShopTest {
     }
 
     public void populateFakeShop(){
-        Shop test1 = new Shop("ID","Poms Mackor","goggreen");
+        Shop test1 = new Shop("ID","Poms Mackor","pomsklipp");
         test1.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test1.setAddress("Johannesvägen 23, Malmö");
         test1.setCardDescription("Köp 10 Mackor, få den 11 gratis!");
@@ -26,7 +26,7 @@ public class ShopTest {
         test1.setPos(44.02,23.00);
 
 
-        Shop test2 = new Shop("ID","Tea Junkie","favvoclean");
+        Shop test2 = new Shop("ID","Tea Junkie","teajunkieclean");
         test2.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test2.setAddress("Johannesvägen 23, Malmö");
         test2.setCardDescription("Köp Té, få 5 gratis!");
@@ -56,7 +56,7 @@ public class ShopTest {
         test4.setPos(44.02,23.00);
 
 
-        Shop test5 = new Shop("ID","Papi", "goggreen");
+        Shop test5 = new Shop("ID","Papi", "papi");
         test5.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test5.setAddress("Johannesvägen 23, Malmö");
         test5.setCardDescription("Köp 7 menyrätter och få 50% på kvittot vid nästa tillfälle");
