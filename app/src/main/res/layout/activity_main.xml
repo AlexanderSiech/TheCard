@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context="com.finkevolution.thecard.Activites.MainActivity">
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
