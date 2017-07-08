@@ -10,6 +10,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,7 +31,7 @@ dependencies {
     })
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
-    compile 'com.android.support:appcompat-v7:25+'
+  //  compile 'com.android.support:appcompat-v7:25+'
 //Google
     compile 'com.google.android.gms:play-services-auth:10.2.1'
 
@@ -48,6 +49,8 @@ dependencies {
     compile 'com.android.support:support-v4:25+'
     compile 'org.mongodb:mongodb-driver:3.4.0-beta1'
     compile 'org.mongodb:stitch:0.1.0-SNAPSHOT'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
 
     compile 'com.android.support:mediarouter-v7:25+'

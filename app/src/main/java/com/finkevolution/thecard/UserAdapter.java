@@ -1,18 +1,15 @@
 package com.finkevolution.thecard;
 
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.finkevolution.thecard.Activites.MainActivity;
 import com.finkevolution.thecard.Objects.Card;
-import com.finkevolution.thecard.Objects.Shop;
-import com.finkevolution.thecard.Objects.User;
 
 import java.util.ArrayList;
 
@@ -22,7 +19,7 @@ import java.util.ArrayList;
 
 
 
-public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private ArrayList<Card> mDataset;
 
     // Provide a reference to the views for each data item
@@ -33,14 +30,14 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> 
 
         public ViewHolder(View v) {
             super(v);
-            background = (ImageView) v.findViewById(R.id.backgoundImgID);
-            banner = (ImageView) v.findViewById(R.id.bannerImgID);
-            stamps = (ImageView) v.findViewById(R.id.stampcountImgID);
+            background = (ImageView) v.findViewById(R.id.backgoundImgIDUser);
+            banner = (ImageView) v.findViewById(R.id.bannerImgIDUser);
+            stamps = (ImageView) v.findViewById(R.id.stampcountImgIDUser);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ShopsAdapter(ArrayList<Card> myDataset) {
+    public UserAdapter(ArrayList<Card> myDataset) {
         mDataset = myDataset;
     }
 
@@ -49,7 +46,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View shopView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.cardview_shop, parent, false);
+                .inflate(R.layout.cardview_user, parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(shopView);
         return vh;
@@ -60,7 +57,6 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-
         holder.background.setImageResource(mDataset.get(position).getShop().getImageSource());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

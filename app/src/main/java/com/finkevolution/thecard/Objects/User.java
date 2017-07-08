@@ -42,4 +42,7 @@ public class User {
     public int getCardQuantity(){
         return usersCards.size();
     }
+    public ArrayList<Card> getUserCards(){
+        return this.usersCards;
+    }
 }
