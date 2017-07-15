@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +18,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.finkevolution.thecard.Controller;
@@ -66,12 +70,13 @@ public class MainActivity extends AppCompatActivity {
     private void initialize() {
 
         MainActivity.context = getApplicationContext();
-        controller = new Controller();
+        controller = new Controller(this);
         mGridLayoutManager = new GridLayoutManager(this, 2);   // tillfällig
         setupToolbar();
         retrieveUserData();
         setupButtons();
         setupRecyclers();
+
         //setRecyclerViewScrollListener();
         // setRecyclerViewItemTouchListener();
 
@@ -92,12 +97,11 @@ public class MainActivity extends AppCompatActivity {
     private void setupRecyclers(){
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         userCardRecycler = (RecyclerView) findViewById(R.id.userCardRecycler);
-
         mLinearLayoutManager = new LinearLayoutManager(this);
         userLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         userCardRecycler.setLayoutManager(userLinearLayoutManager);
-        mAdapter = new ShopsAdapter(shopList);
+        mAdapter = new ShopsAdapter(shopList,controller);
         userCardAdapter = new UserAdapter(userCardList);
         mRecyclerView.setAdapter(mAdapter);
         userCardRecycler.setAdapter(userCardAdapter);
@@ -219,5 +223,29 @@ public class MainActivity extends AppCompatActivity {
         return MainActivity.context;
     }
 
+
+    public void inflateStub(){
+        ViewStub stub = (ViewStub) findViewById(R.id.stub);
+        View inflated = stub.inflate();
+        enableViews(findViewById(R.id.drawer_layout),false);
+    }
+
+    private void enableViews(View v, boolean enabled) {
+        if (v instanceof ViewGroup) {
+            ViewGroup vg = (ViewGroup) v;
+            for (int i = 0;i<vg.getChildCount();i++) {
+                enableViews(vg.getChildAt(i), enabled);
+            }
+        }
+        v.setEnabled(enabled);
+
+        mLinearLayoutManager = new LinearLayoutManager(this){
+            @Override
+        public boolean canScrollVertically() {
+            return false;
+        }
+    };
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+    }
 
 }

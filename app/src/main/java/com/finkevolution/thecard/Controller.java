@@ -1,5 +1,6 @@
 package com.finkevolution.thecard;
 
+import com.finkevolution.thecard.Activites.MainActivity;
 import com.finkevolution.thecard.Objects.Card;
 import com.finkevolution.thecard.Objects.Shop;
 import com.finkevolution.thecard.Objects.User;
@@ -19,9 +20,11 @@ public class Controller {
     private ArrayList<Shop> shops = new ArrayList<Shop>();
     private ArrayList<Card> cards = new ArrayList<Card>();
     private ArrayList<Card> favorites = new ArrayList<Card>();
+    private MainActivity mainActivity;
 
-    public Controller(){
+    public Controller(MainActivity mainActivity){
         user = new User("ID","johannes@gmail.com");
+        this.mainActivity = mainActivity;
         createTestClasses();
         convertShopToCard();
         retrieveUserFavorites();
@@ -60,6 +63,10 @@ public class Controller {
 
     public ArrayList<Card> getUserFavorites(){
         return this.favorites;
+    }
+
+    public void inflateStub(){
+        mainActivity.inflateStub();
     }
 
 
