@@ -26,6 +26,8 @@ import java.util.ArrayList;
 public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> {
     private ArrayList<Card> mDataset;
     private Controller controller;
+    public boolean isClickable = true;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -68,6 +70,9 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!isClickable) {
+                    return;
+                }
                 Toast.makeText(MainActivity.getContext(),mDataset.get(position).getShop().getName(),Toast.LENGTH_SHORT).show();
                 controller.inflateStub();
             }

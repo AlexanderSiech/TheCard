@@ -1,6 +1,10 @@
 package com.finkevolution.thecard;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.finkevolution.thecard.Activites.MainActivity;
+import com.finkevolution.thecard.ExternalServices.NFC;
 import com.finkevolution.thecard.Objects.Card;
 import com.finkevolution.thecard.Objects.Shop;
 import com.finkevolution.thecard.Objects.User;
@@ -21,10 +25,13 @@ public class Controller {
     private ArrayList<Card> cards = new ArrayList<Card>();
     private ArrayList<Card> favorites = new ArrayList<Card>();
     private MainActivity mainActivity;
+    private NFC nfcManager;
 
     public Controller(MainActivity mainActivity){
         user = new User("ID","johannes@gmail.com");
         this.mainActivity = mainActivity;
+        nfcManager = new NFC(mainActivity);
+        nfcManager.start();
         createTestClasses();
         convertShopToCard();
         retrieveUserFavorites();
@@ -67,6 +74,10 @@ public class Controller {
 
     public void inflateStub(){
         mainActivity.inflateStub();
+    }
+
+    public void resolveIntent(Intent intent){
+        nfcManager.resolveIntent(intent);
     }
 
 

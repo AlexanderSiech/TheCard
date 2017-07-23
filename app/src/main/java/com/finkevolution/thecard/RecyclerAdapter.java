@@ -23,6 +23,7 @@ import static android.support.v7.widget.RecyclerView.*;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PhotoHolder>{
 
     private ArrayList<Photo> mPhotos;
+    private static boolean isClickable = true;
 
 
     public RecyclerAdapter(ArrayList<Photo> photos){
@@ -69,6 +70,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PhotoH
 
         @Override
         public void onClick(View v) {
+            if(!isClickable) {
+                return;
+            }
             Context context = itemView.getContext();
             Intent showPhotoIntent = new Intent(context, PhotoActivity.class);
             showPhotoIntent.putExtra(PHOTO_KEY , mPhoto);

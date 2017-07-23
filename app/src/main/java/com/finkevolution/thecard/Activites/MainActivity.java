@@ -3,10 +3,17 @@
 
 package com.finkevolution.thecard.Activites;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +21,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,9 +29,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.finkevolution.thecard.Controller;
 import com.finkevolution.thecard.Objects.Card;
@@ -31,6 +44,7 @@ import com.finkevolution.thecard.R;
 import com.finkevolution.thecard.ShopsAdapter;
 import com.finkevolution.thecard.UserAdapter;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent i = getIntent();
      //   getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         initialize();
+        checkLaunchType(i);
     }
 
 
@@ -80,6 +96,14 @@ public class MainActivity extends AppCompatActivity {
         //setRecyclerViewScrollListener();
         // setRecyclerViewItemTouchListener();
 
+    }
+
+    private void checkLaunchType(Intent intent){
+        if(intent.getAction() == NfcAdapter.ACTION_NDEF_DISCOVERED)
+        {
+            Toast.makeText(this,"Intent Launch: " + intent.getAction(), Toast.LENGTH_SHORT ).show();
+            controller.resolveIntent(intent);
+        }
     }
 
     /**
@@ -227,7 +251,14 @@ public class MainActivity extends AppCompatActivity {
     public void inflateStub(){
         ViewStub stub = (ViewStub) findViewById(R.id.stub);
         View inflated = stub.inflate();
-        enableViews(findViewById(R.id.drawer_layout),false);
+        ViewGroup.LayoutParams lp = inflated.getLayoutParams();
+
+      //  View theTest = inflated.findViewById(R.id.subTree);
+    //    Animation animation = AnimationUtils.makeInAnimation(this, true);
+        Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidedown);
+        inflated.startAnimation(slide);
+        enableViews(findViewById(R.id.main_layout),false);
+        mAdapter.isClickable = false;
     }
 
     private void enableViews(View v, boolean enabled) {
@@ -247,5 +278,34 @@ public class MainActivity extends AppCompatActivity {
     };
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
     }
+
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        controller.resolveIntent(intent);
+}
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NfcManager nfcManager = (NfcManager) getSystemService(NFC_SERVICE);
+        NfcAdapter nfcAdapter = nfcManager.getDefaultAdapter();
+        Intent intent = new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        NfcManager nfcManager = (NfcManager) getSystemService(NFC_SERVICE);
+        NfcAdapter nfcAdapter = nfcManager.getDefaultAdapter();
+        nfcAdapter.disableForegroundDispatch(this);
+
+    }
+
+
 
 }
