@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -33,6 +34,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -101,8 +103,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkLaunchType(Intent intent){
         if(intent.getAction() == NfcAdapter.ACTION_NDEF_DISCOVERED)
         {
-            Toast.makeText(this,"Intent Launch: " + intent.getAction(), Toast.LENGTH_SHORT ).show();
-            controller.resolveIntent(intent);
+            //controller.resolveIntent(intent);
         }
     }
 
@@ -249,23 +250,67 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void inflateStub(){
-        ViewStub stub = (ViewStub) findViewById(R.id.stub);
-        View inflated = stub.inflate();
-        ViewGroup.LayoutParams lp = inflated.getLayoutParams();
+        final ViewStub stub = new ViewStub(this);
+        final int[] touched = {0};
+        stub.setLayoutResource(R.layout.testinflate);
+        stub.setInflatedId(stub.generateViewId());
 
-      //  View theTest = inflated.findViewById(R.id.subTree);
-    //    Animation animation = AnimationUtils.makeInAnimation(this, true);
+
+        final int inflatedId = stub.getInflatedId();
+        final DrawerLayout dl = (DrawerLayout) findViewById(R.id.drawer_layout);
+        dl.addView(stub);
+
+        final View inflated = stub.inflate();
+        final ImageButton outOfBound = (ImageButton) findViewById(R.id.imageButton);
+        final LinearLayout v = (LinearLayout) findViewById(inflatedId);
+        final Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slideup);
+
+
+
+        slideUp.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                enableViews(findViewById(R.id.main_layout),true,true);
+                mAdapter.isClickable = true;
+                v.removeView(outOfBound);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                dl.removeView(stub);
+                stub.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        outOfBound.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(touched[0] == 0) {
+                    inflated.startAnimation(slideUp);
+                }
+
+                touched[0]++;
+                return false;
+            }
+        });
+
+
         Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidedown);
         inflated.startAnimation(slide);
-        enableViews(findViewById(R.id.main_layout),false);
+        enableViews(findViewById(R.id.main_layout),false,false);
         mAdapter.isClickable = false;
     }
 
-    private void enableViews(View v, boolean enabled) {
+    private void enableViews(View v, boolean enabled, final boolean scroll) {
         if (v instanceof ViewGroup) {
             ViewGroup vg = (ViewGroup) v;
             for (int i = 0;i<vg.getChildCount();i++) {
-                enableViews(vg.getChildAt(i), enabled);
+                enableViews(vg.getChildAt(i), enabled,scroll);
             }
         }
         v.setEnabled(enabled);
@@ -273,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
         mLinearLayoutManager = new LinearLayoutManager(this){
             @Override
         public boolean canScrollVertically() {
-            return false;
+            return scroll;
         }
     };
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
