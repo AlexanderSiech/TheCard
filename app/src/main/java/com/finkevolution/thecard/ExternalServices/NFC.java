@@ -35,11 +35,17 @@ public class NFC extends Thread{
         if(intent!=null && NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())){
             Parcelable[] ndefMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             for(Parcelable message : ndefMessages) {
-                NdefRecord[] records = ((NdefMessage)message).getRecords(); for(NdefRecord record : records){
+                NdefRecord[] records = ((NdefMessage)message).getRecords();
+              /**
+                for(NdefRecord record : records){
                     String msg = new String(record.getPayload(), Charset.forName("ISO-8859-1"));
-                    Log.d("THE MESSAGE", msg);
-                    Toast.makeText(activity, "THE MESS", Toast.LENGTH_SHORT).show();
-                } }
+                    Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+                }
+            **/
+            String msg = new String (records[0].getPayload(), Charset.forName("ISO-8859-1"));
+                Toast.makeText(activity,msg,Toast.LENGTH_SHORT).show();
+
+            }
         }
 
     }

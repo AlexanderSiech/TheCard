@@ -13,6 +13,8 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkLaunchType(Intent intent){
         if(intent.getAction() == NfcAdapter.ACTION_NDEF_DISCOVERED)
         {
-            //controller.resolveIntent(intent);
+            controller.resolveIntent(intent);
         }
     }
 
@@ -254,13 +256,12 @@ public class MainActivity extends AppCompatActivity {
         final int[] touched = {0};
         stub.setLayoutResource(R.layout.testinflate);
         stub.setInflatedId(stub.generateViewId());
-
-
         final int inflatedId = stub.getInflatedId();
         final DrawerLayout dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         dl.addView(stub);
-
         final View inflated = stub.inflate();
+        inflated.setClickable(true);
+        dl.setClickable(false);
         final ImageButton outOfBound = (ImageButton) findViewById(R.id.imageButton);
         final LinearLayout v = (LinearLayout) findViewById(inflatedId);
         final Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slideup);
@@ -270,15 +271,20 @@ public class MainActivity extends AppCompatActivity {
         slideUp.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                enableViews(findViewById(R.id.main_layout),true,true);
-                mAdapter.isClickable = true;
                 v.removeView(outOfBound);
+                inflated.setClickable(false);
+                dl.setClickable(true);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                dl.removeView(stub);
-                stub.setVisibility(View.GONE);
+               // stub.setVisibility(View.GONE);
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        dl.removeView(inflated);
+                    }
+                });
             }
 
             @Override
@@ -286,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
         outOfBound.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -299,32 +306,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidedown);
         inflated.startAnimation(slide);
-        enableViews(findViewById(R.id.main_layout),false,false);
-        mAdapter.isClickable = false;
     }
-
-    private void enableViews(View v, boolean enabled, final boolean scroll) {
-        if (v instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup) v;
-            for (int i = 0;i<vg.getChildCount();i++) {
-                enableViews(vg.getChildAt(i), enabled,scroll);
-            }
-        }
-        v.setEnabled(enabled);
-
-        mLinearLayoutManager = new LinearLayoutManager(this){
-            @Override
-        public boolean canScrollVertically() {
-            return scroll;
-        }
-    };
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-    }
-
-
 
     @Override
     protected void onNewIntent(Intent intent) {
