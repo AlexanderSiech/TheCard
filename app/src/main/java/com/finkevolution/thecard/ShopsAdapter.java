@@ -1,6 +1,7 @@
 package com.finkevolution.thecard;
 
 import android.provider.ContactsContract;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.finkevolution.thecard.Activites.MainActivity;
 import com.finkevolution.thecard.Objects.Card;
 import com.finkevolution.thecard.Objects.Shop;
 import com.finkevolution.thecard.Objects.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,7 +28,6 @@ import java.util.ArrayList;
 public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> {
     private ArrayList<Card> mDataset;
     private Controller controller;
-    public boolean isClickable = true;
 
 
     // Provide a reference to the views for each data item
@@ -67,14 +68,20 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> 
         // - replace the contents of the view with that element
 
         holder.background.setImageResource(mDataset.get(position).getShop().getImageSource());
+        Picasso.with(holder.itemView.getContext())
+                .load(mDataset.get(position).getShop().getImageSource())
+                .into(holder.background);
+
+        ViewCompat.setTransitionName(holder.background, mDataset.get(position).getShop().getName());
+
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isClickable) {
-                    return;
-                }
                 Toast.makeText(MainActivity.getContext(),mDataset.get(position).getShop().getName(),Toast.LENGTH_SHORT).show();
-                controller.inflateStub();
+                controller.expandCard(holder.background,mDataset.get(position));
+               // controller.inflateStub();
             }
         });
 

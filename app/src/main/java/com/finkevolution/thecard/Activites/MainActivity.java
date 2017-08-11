@@ -3,9 +3,8 @@
 
 package com.finkevolution.thecard.Activites;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.annotation.TargetApi;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +17,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,12 +33,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -123,15 +126,10 @@ public class MainActivity extends AppCompatActivity {
      * Setup and populate Recyclers
      */
     private void setupRecyclers(){
-       // mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         userCardRecycler = (RecyclerView) findViewById(R.id.userCardRecycler);
-       // mLinearLayoutManager = new LinearLayoutManager(this);
         userLinearLayoutManager = new LinearLayoutManager(this);
-       // mRecyclerView.setLayoutManager(mLinearLayoutManager);
         userCardRecycler.setLayoutManager(userLinearLayoutManager);
-       // mAdapter = new ShopsAdapter(shopList,controller);
         userCardAdapter = new UserAdapter(userCardList);
-       // mRecyclerView.setAdapter(mAdapter);
         userCardRecycler.setAdapter(userCardAdapter);
 
 
@@ -251,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
         return MainActivity.context;
     }
 
-
+/**
     public void inflateStub(){
         final ViewStub stub = new ViewStub(this);
         final int[] touched = {0};
@@ -327,16 +325,35 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
     }
 
-    public void setFragment(Fragment fragment, boolean backstack){
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
+ **/
+
+    public void setFragment(android.support.v4.app.Fragment fragment, boolean backstack){
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
       //  ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
-        ft.replace(R.id.fragmentLayout, fragment);
+        ft.replace(R.id.fragmentLayout, fragment, "MainFrag");
         if(backstack){
             ft.addToBackStack(null);
         }
         ft.commit();
     }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void expandFragment(ImageView sharedImageView, android.support.v4.app.Fragment fragment, boolean backstack){
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+        ft.addSharedElement(sharedImageView,ViewCompat.getTransitionName(sharedImageView));
+        ft.replace(R.id.fragmentLayout,fragment);
+
+
+
+        if(backstack){
+            ft.addToBackStack(null);
+        }
+        ft.commit();
+
+    }
+
 
 
 

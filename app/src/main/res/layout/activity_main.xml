@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -21,25 +27,14 @@
             android:layout_gravity="center" />
 
     </android.support.v7.widget.Toolbar>
-
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:id="@+id/fragmentLayout">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/fragmentLayout">
+    </LinearLayout>
 </LinearLayout>
 
-    <ViewStub
-        android:id="@+id/stub"
-        android:inflatedId="@+id/subTree"
-        android:layout="@layout/testinflate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"/>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view_left"

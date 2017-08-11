@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created by Girondins on 11/08/17.
  */
 
-public class CardlistFragment extends Fragment{
+public class CardlistFragment extends android.support.v4.app.Fragment{
     private RecyclerView mRecyclerView;
     private ShopsAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
@@ -31,7 +31,7 @@ public class CardlistFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.app_main, container, false);
+        View v = inflater.inflate(R.layout.app_main_fragment, container, false);
         cardList = (ArrayList<Card>) getArguments().getSerializable("cardlist");
 
 

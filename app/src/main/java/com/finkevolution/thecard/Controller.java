@@ -3,8 +3,10 @@ package com.finkevolution.thecard;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.finkevolution.thecard.Activites.CardlistFragment;
+import com.finkevolution.thecard.Activites.ExpandedFragment;
 import com.finkevolution.thecard.Activites.MainActivity;
 import com.finkevolution.thecard.ExternalServices.NFC;
 import com.finkevolution.thecard.Objects.Card;
@@ -84,9 +86,22 @@ public class Controller {
         return this.favorites;
     }
 
+
+    // TODO Ändra sen Tillfällgit som en imageSource int
+    public void expandCard(ImageView imageView, Card card){
+        Bundle cardBundle = new Bundle();
+        cardBundle.putSerializable("card", card);
+        ExpandedFragment expandedFragment = new ExpandedFragment();
+        expandedFragment.setArguments(cardBundle);
+        expandedFragment.setController(this);
+        mainActivity.expandFragment(imageView,expandedFragment,true);
+    }
+
+    /**
     public void inflateStub(){
         mainActivity.inflateStub();
     }
+     **/
 
     public void resolveIntent(Intent intent){
         nfcManager.resolveIntent(intent);
