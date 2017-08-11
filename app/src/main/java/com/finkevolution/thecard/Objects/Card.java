@@ -1,10 +1,12 @@
 package com.finkevolution.thecard.Objects;
 
+import java.io.Serializable;
+
 /**
  * Created by FinkEvolution on 2017-06-28.
  */
 
-public class Card {
+public class Card implements Serializable {
     private Shop shop;
     private int stampsCollected;
     private boolean isFavorite;

@@ -3,13 +3,14 @@ package com.finkevolution.thecard.Objects;
 import com.finkevolution.thecard.Activites.MainActivity;
 import com.finkevolution.thecard.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by FinkEvolution on 2017-06-29.
  */
 
-public class OpenHours {
+public class OpenHours implements Serializable{
     ArrayList<Day> openHours = new ArrayList<Day>();
 
     public OpenHours(){

@@ -2,7 +2,9 @@ package com.finkevolution.thecard;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
+import com.finkevolution.thecard.Activites.CardlistFragment;
 import com.finkevolution.thecard.Activites.MainActivity;
 import com.finkevolution.thecard.ExternalServices.NFC;
 import com.finkevolution.thecard.Objects.Card;
@@ -35,8 +37,18 @@ public class Controller {
         createTestClasses();
         convertShopToCard();
         retrieveUserFavorites();
+        setupListFragment();
         new TestRunner(user,shops);
 
+    }
+
+    public void setupListFragment(){
+        Bundle cardBundle = new Bundle();
+        cardBundle.putSerializable("cardlist", cards);
+        CardlistFragment cardlistFragment = new CardlistFragment();
+        cardlistFragment.setArguments(cardBundle);
+        cardlistFragment.setController(this);
+        mainActivity.setFragment(cardlistFragment,false);
     }
 
     public void createTestClasses(){

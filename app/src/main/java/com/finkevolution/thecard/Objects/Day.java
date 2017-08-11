@@ -3,11 +3,13 @@ package com.finkevolution.thecard.Objects;
 import com.finkevolution.thecard.Activites.MainActivity;
 import com.finkevolution.thecard.R;
 
+import java.io.Serializable;
+
 /**
  * Created by FinkEvolution on 2017-06-29.
  */
 
-public class Day {
+public class Day implements Serializable{
     String dayOfWeek,openHours;
 
     public Day(String day){

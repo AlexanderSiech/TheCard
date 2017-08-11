@@ -1,10 +1,12 @@
 package com.finkevolution.thecard.Objects;
 
+import java.io.Serializable;
+
 /**
  * Created by FinkEvolution on 2017-06-29.
  */
 
-public class LatLong {
+public class LatLong implements Serializable{
     public double longitude,latitude;
 
     public LatLong(double longitude, double latitude){

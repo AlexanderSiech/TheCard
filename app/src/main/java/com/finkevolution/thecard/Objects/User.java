@@ -1,12 +1,13 @@
 package com.finkevolution.thecard.Objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by FinkEvolution on 2017-06-28.
  */
 
-public class User {
+public class User implements Serializable{
     private String id,identifier;
     private ArrayList<Card>usersCards = new ArrayList<Card>();
 

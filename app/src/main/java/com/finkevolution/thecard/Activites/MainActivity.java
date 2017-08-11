@@ -3,6 +3,9 @@
 
 package com.finkevolution.thecard.Activites;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -120,15 +123,15 @@ public class MainActivity extends AppCompatActivity {
      * Setup and populate Recyclers
      */
     private void setupRecyclers(){
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+       // mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         userCardRecycler = (RecyclerView) findViewById(R.id.userCardRecycler);
-        mLinearLayoutManager = new LinearLayoutManager(this);
+       // mLinearLayoutManager = new LinearLayoutManager(this);
         userLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+       // mRecyclerView.setLayoutManager(mLinearLayoutManager);
         userCardRecycler.setLayoutManager(userLinearLayoutManager);
-        mAdapter = new ShopsAdapter(shopList,controller);
+       // mAdapter = new ShopsAdapter(shopList,controller);
         userCardAdapter = new UserAdapter(userCardList);
-        mRecyclerView.setAdapter(mAdapter);
+       // mRecyclerView.setAdapter(mAdapter);
         userCardRecycler.setAdapter(userCardAdapter);
 
 
@@ -322,6 +325,17 @@ public class MainActivity extends AppCompatActivity {
         }
     };
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
+    }
+
+    public void setFragment(Fragment fragment, boolean backstack){
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+      //  ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
+        ft.replace(R.id.fragmentLayout, fragment);
+        if(backstack){
+            ft.addToBackStack(null);
+        }
+        ft.commit();
     }
 
 

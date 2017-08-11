@@ -3,11 +3,13 @@ package com.finkevolution.thecard.Objects;
 import com.finkevolution.thecard.Activites.MainActivity;
 import com.mongodb.gridfs.GridFSDBFile;
 
+import java.io.Serializable;
+
 /**
  * Created by FinkEvolution on 2017-06-28.
  */
 
-public class Shop {
+public class Shop implements Serializable{
     String id,name,address,url,phone, cardDescription;
     int stampcount;
     LatLong pos;
