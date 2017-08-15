@@ -68,10 +68,11 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> 
         // - replace the contents of the view with that element
 
         holder.background.setImageResource(mDataset.get(position).getShop().getImageSource());
+        /**
         Picasso.with(holder.itemView.getContext())
                 .load(mDataset.get(position).getShop().getImageSource())
                 .into(holder.background);
-
+**/
         ViewCompat.setTransitionName(holder.background, mDataset.get(position).getShop().getName());
 
 

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created by Girondins on 11/08/17.
  */
 
-public class CardlistFragment extends android.support.v4.app.Fragment{
+public class CardlistFragment extends Fragment{
     private RecyclerView mRecyclerView;
     private ShopsAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;

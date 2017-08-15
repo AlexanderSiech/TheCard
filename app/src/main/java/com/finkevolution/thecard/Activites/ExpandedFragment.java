@@ -5,12 +5,14 @@ import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -24,7 +26,7 @@ import com.squareup.picasso.Picasso;
  * Created by Girondins on 2017-08-11.
  */
 
-public class ExpandedFragment extends android.support.v4.app.Fragment {
+public class ExpandedFragment extends Fragment {
     private Controller controller;
     private Card card;
 
@@ -32,7 +34,7 @@ public class ExpandedFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        postponeEnterTransition();
+     //   ActivityCompat.postponeEnterTransition(getActivity());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setSharedElementEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.move));
         }
@@ -41,12 +43,11 @@ public class ExpandedFragment extends android.support.v4.app.Fragment {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.expanded_main_fragment, container, false);
         card = (Card) getArguments().getSerializable("card");
     //    AnimalItem animalItem = getArguments().getParcelable(EXTRA_ANIMAL_ITEM);
     //    String transitionName = getArguments().getString(EXTRA_TRANSITION_NAME);
-
 
 
         return v;
@@ -55,18 +56,15 @@ public class ExpandedFragment extends android.support.v4.app.Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final ImageView imageView = (ImageView) view.findViewById(R.id.sharedTestID);
 
-
-
-        ImageView imageView = (ImageView) view.findViewById(R.id.sharedTestID);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             imageView.setTransitionName(card.getShop().getName());
         }
+        imageView.setImageResource(card.getShop().getImageSource());
 
-        Toast.makeText(getActivity(),"Shop is : " + card.getShop().getName(),Toast.LENGTH_SHORT).show();
-        Log.d("Shop is Woob : " + card.getShop().getName()," " + card.getShop().getImageSource());
-
-        Picasso.with(getActivity())
+/**
+        Picasso.with(getActivity().getApplicationContext())
                 .load(card.getShop().getImageSource())
                 .noFade()
                 .into(imageView, new Callback() {
@@ -74,16 +72,21 @@ public class ExpandedFragment extends android.support.v4.app.Fragment {
                     @Override
                     public void onSuccess() {
                           startPostponedEnterTransition();
+                        Log.d("Success Post","H");
                     }
 
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onError() {
                           startPostponedEnterTransition();
+                        Log.d("Success Nah","H");
                     }
                 });
+**/
+
 
     }
+
 
     public void setController(Controller controller){
         this.controller = controller;

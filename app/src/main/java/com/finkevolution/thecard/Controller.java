@@ -94,8 +94,9 @@ public class Controller {
         ExpandedFragment expandedFragment = new ExpandedFragment();
         expandedFragment.setArguments(cardBundle);
         expandedFragment.setController(this);
-        mainActivity.expandFragment(imageView,expandedFragment,true);
+        mainActivity.expandFragment(imageView,expandedFragment);
     }
+
 
     /**
     public void inflateStub(){

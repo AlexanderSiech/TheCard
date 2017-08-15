@@ -5,6 +5,7 @@ package com.finkevolution.thecard.Activites;
 
 import android.annotation.TargetApi;
 
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -82,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent i = getIntent();
+        postponeEnterTransition();
      //   getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         initialize();
         checkLaunchType(i);
@@ -327,9 +331,9 @@ public class MainActivity extends AppCompatActivity {
 
  **/
 
-    public void setFragment(android.support.v4.app.Fragment fragment, boolean backstack){
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+    public void setFragment(Fragment fragment, boolean backstack){
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
       //  ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
         ft.replace(R.id.fragmentLayout, fragment, "MainFrag");
         if(backstack){
@@ -339,17 +343,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void expandFragment(ImageView sharedImageView, android.support.v4.app.Fragment fragment, boolean backstack){
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+    public void expandFragment(ImageView sharedImageView,Fragment fragment){
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
         ft.addSharedElement(sharedImageView,ViewCompat.getTransitionName(sharedImageView));
         ft.replace(R.id.fragmentLayout,fragment);
-
-
-
-        if(backstack){
-            ft.addToBackStack(null);
-        }
+        ft.addToBackStack(null);
         ft.commit();
 
     }
