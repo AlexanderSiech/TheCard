@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.finkevolution.thecard.Controller;
 import com.finkevolution.thecard.Objects.Card;
+import com.finkevolution.thecard.Objects.Shop;
 import com.finkevolution.thecard.R;
 import com.finkevolution.thecard.ShopsAdapter;
 
@@ -25,21 +26,21 @@ public class CardlistFragment extends Fragment{
     private ShopsAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private Controller controller;
-    private ArrayList<Card> cardList;
+    private ArrayList<Card> shopList;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.app_main_fragment, container, false);
-        cardList = (ArrayList<Card>) getArguments().getSerializable("cardlist");
+        shopList = (ArrayList<Card>) getArguments().getSerializable("cardlist");
 
 
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new ShopsAdapter(cardList,controller);
+        mAdapter = new ShopsAdapter(shopList,controller);
         mRecyclerView.setAdapter(mAdapter);
 
 

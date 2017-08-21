@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
      * Retrieves required data
      */
     private void retrieveUserData(){
-        shopList = controller.getShops();
+      //  shopList = controller.getShops();
         userCardList = controller.getUserCards();
         favoriteList = controller.getUserFavorites();
     }

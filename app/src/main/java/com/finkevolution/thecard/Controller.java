@@ -38,6 +38,7 @@ public class Controller {
         nfcManager.start();
         createTestClasses();
         convertShopToCard();
+        checkUserCard();
         retrieveUserFavorites();
         setupListFragment();
         new TestRunner(user,shops);
@@ -86,8 +87,17 @@ public class Controller {
         return this.favorites;
     }
 
+    public void checkUserCard(){
+        for (int i  = 0 ; i<user.getCardQuantity(); i++){
+            for(int j = 0 ; j<cards.size() ; j++){
+                if(cards.get(j).getShop().getId().equals(user.getCardIndex(i).getShop().getId())){
+                    cards.set(j,user.getCardIndex(i));
+                    System.out.println("SWAP" + " " + user.getCardIndex(i).getShop().getName() + " stamps: " + user.getCardIndex(i).getStampsCollected());
+                }
+            }
+        }
+    }
 
-    // TODO Ändra sen Tillfällgit som en imageSource int
     public void expandCard(ImageView imageView, Card card){
         Bundle cardBundle = new Bundle();
         cardBundle.putSerializable("card", card);

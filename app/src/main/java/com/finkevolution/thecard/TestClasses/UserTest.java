@@ -27,7 +27,7 @@ public class UserTest {
 
     public void createFakeShops(){
 
-        test1 = new Shop("ID","Poms Mackor", "pomsklipp");
+        test1 = new Shop("ID1","Poms Mackor", "pomsklipp");
         test1.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test1.setAddress("Johannesvägen 23, Malmö");
         test1.setCardDescription("Köp 10 Mackor, få den 11 gratis!");
@@ -37,7 +37,7 @@ public class UserTest {
         test1.setPos(44.02,23.00);
 
 
-        test2 = new Shop("ID","Tea Junkie", "teajunkieclean");
+        test2 = new Shop("ID2","Tea Junkie", "teajunkieclean");
         test2.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test2.setAddress("Johannesvägen 23, Malmö");
         test2.setCardDescription("Köp Té, få 5 gratis!");
@@ -47,7 +47,7 @@ public class UserTest {
         test2.setPos(44.02,23.00);
 
 
-        test3 = new Shop("ID","Grönt och Gott", "goggreen");
+        test3 = new Shop("ID3","Grönt och Gott", "goggreen");
         test3.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test3.setAddress("Johannesvägen 23, Malmö");
         test3.setCardDescription("Köp 10 sallader, få den 11 gratis!");
@@ -57,7 +57,7 @@ public class UserTest {
         test3.setPos(44.02,23.00);
 
 
-        test4 = new Shop("ID","Restaurang Niagara", "gogopink");
+        test4 = new Shop("ID4","Restaurang Niagara", "gogopink");
         test4.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test4.setAddress("Johannesvägen 23, Malmö");
         test4.setCardDescription("Köp Tillgodokort för 450:-, få 10 tillfällen");

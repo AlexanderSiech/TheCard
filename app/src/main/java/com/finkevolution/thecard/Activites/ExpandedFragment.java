@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.finkevolution.thecard.Controller;
@@ -48,6 +49,8 @@ public class ExpandedFragment extends Fragment {
         card = (Card) getArguments().getSerializable("card");
     //    AnimalItem animalItem = getArguments().getParcelable(EXTRA_ANIMAL_ITEM);
     //    String transitionName = getArguments().getString(EXTRA_TRANSITION_NAME);
+        TextView tv = (TextView) v.findViewById(R.id.textView2);
+        tv.setText(card.getStampsCollected() + "");
 
 
         return v;
