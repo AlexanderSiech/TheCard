@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 
 public class Shop implements Serializable{
-    String id,name,address,url,phone, cardDescription;
+    String id,name,address,url,phone, cardDescription, shopDescription;
     int stampcount;
     LatLong pos;
     OpenHours openHours;
@@ -52,6 +52,10 @@ public class Shop implements Serializable{
 
     public void setCardDescription(String cardDescription){
         this.cardDescription = cardDescription;
+    }
+
+    public void setShopDescription(String shopDescription){
+        this.shopDescription = shopDescription;
     }
 
     public void setStampcount(int stampcount){
@@ -124,6 +128,10 @@ public class Shop implements Serializable{
 
     public int getImageSource(){
         return imgSource;
+    }
+
+    public String getShopDescription() {
+        return shopDescription;
     }
 
 }

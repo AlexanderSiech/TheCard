@@ -30,6 +30,7 @@ public class UserTest {
         test1 = new Shop("ID1","Poms Mackor", "pomsklipp");
         test1.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test1.setAddress("Johannesvägen 23, Malmö");
+        test1.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBL");
         test1.setCardDescription("Köp 10 Mackor, få den 11 gratis!");
         test1.setPhone("040-403203");
         test1.setStampcount(10);
@@ -40,16 +41,18 @@ public class UserTest {
         test2 = new Shop("ID2","Tea Junkie", "teajunkieclean");
         test2.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test2.setAddress("Johannesvägen 23, Malmö");
+        test2.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBL");
         test2.setCardDescription("Köp Té, få 5 gratis!");
         test2.setPhone("040-403203");
         test2.setStampcount(5);
         test2.setURL("www.teajunkie.se");
-        test2.setPos(44.02,23.00);
+        test2.setPos(23.30,10.00);
 
 
         test3 = new Shop("ID3","Grönt och Gott", "goggreen");
         test3.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test3.setAddress("Johannesvägen 23, Malmö");
+        test3.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBL");
         test3.setCardDescription("Köp 10 sallader, få den 11 gratis!");
         test3.setPhone("040-403203");
         test3.setStampcount(10);
@@ -60,6 +63,7 @@ public class UserTest {
         test4 = new Shop("ID4","Restaurang Niagara", "gogopink");
         test4.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test4.setAddress("Johannesvägen 23, Malmö");
+        test4.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBL");
         test4.setCardDescription("Köp Tillgodokort för 450:-, få 10 tillfällen");
         test4.setPhone("040-403203");
         test4.setStampcount(10);

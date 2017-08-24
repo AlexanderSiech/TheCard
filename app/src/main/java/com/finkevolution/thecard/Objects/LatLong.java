@@ -21,4 +21,12 @@ public class LatLong implements Serializable{
     public double getLatitude(){
         return this.latitude;
     }
+
+    public void setLongitude(double longitude){
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(double latitude){
+        this.longitude = latitude;
+    }
 }

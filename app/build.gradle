@@ -35,6 +35,8 @@ dependencies {
 //Google
     compile 'com.google.android.gms:play-services-auth:10.2.1'
 
+    compile 'com.google.android.gms:play-services-maps:10.2.1'
+
 
 
 

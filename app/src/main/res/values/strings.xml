@@ -20,4 +20,9 @@
   <string name="sunday">Söndag</string>
   <string name="closed">Stängt</string>
 
+  <string name="openhours">Öppettider</string>
+  <string name="contact">Kontakt</string>
+  <string name="findus">Hitta oss här</string>
+  <string name="youarehere">Här är du</string>
+
 </resources>

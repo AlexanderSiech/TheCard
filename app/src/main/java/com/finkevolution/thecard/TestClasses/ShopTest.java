@@ -19,6 +19,7 @@ public class ShopTest {
         Shop test1 = new Shop("ID1","Poms Mackor","pomsklipp");
         test1.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test1.setAddress("Johannesvägen 23, Malmö");
+        test1.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBLBLALBLBLALBLLBLSLBALSBLASBLLBL");
         test1.setCardDescription("Köp 10 Mackor, få den 11 gratis!");
         test1.setPhone("040-403203");
         test1.setStampcount(10);
@@ -29,16 +30,18 @@ public class ShopTest {
         Shop test2 = new Shop("ID2","Tea Junkie","teajunkieclean");
         test2.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test2.setAddress("Johannesvägen 23, Malmö");
+        test2.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBL");
         test2.setCardDescription("Köp Té, få 5 gratis!");
         test2.setPhone("040-403203");
         test2.setStampcount(5);
         test2.setURL("www.teajunkie.se");
-        test2.setPos(44.02,23.00);
+        test2.setPos(23.30,10.00);
 
 
         Shop test3 = new Shop("ID3","Grönt och Gott","goggreen");
         test3.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test3.setAddress("Johannesvägen 23, Malmö");
+        test3.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBL");
         test3.setCardDescription("Köp 10 sallader, få den 11 gratis!");
         test3.setPhone("040-403203");
         test3.setStampcount(10);
@@ -59,6 +62,7 @@ public class ShopTest {
         Shop test5 = new Shop("ID5","Papi", "papi");
         test5.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test5.setAddress("Johannesvägen 23, Malmö");
+        test5.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBL");
         test5.setCardDescription("Köp 7 menyrätter och få 50% på kvittot vid nästa tillfälle");
         test5.setPhone("040-403203");
         test5.setStampcount(7);
@@ -69,6 +73,7 @@ public class ShopTest {
         Shop test6 = new Shop("ID6","Favvo Glass", "favvoclean");
         test6.setOpenHours("10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 17:00","10:00 - 20:00","11:00 - 21:00",null);
         test6.setAddress("Johannesvägen 23, Malmö");
+        test6.setShopDescription("BLALBLBLALBLLBLSLBALSBLASBLLBL");
         test6.setCardDescription("Köp 5 mjukglasser och få en 3 kulor bägare gratis");
         test6.setPhone("040-403203");
         test6.setStampcount(5);
