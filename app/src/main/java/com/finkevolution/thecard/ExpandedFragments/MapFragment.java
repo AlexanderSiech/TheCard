@@ -1,6 +1,7 @@
 package com.finkevolution.thecard.ExpandedFragments;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 /**
  * Created by Girondins on 22/08/17.
@@ -53,6 +55,9 @@ public class MapFragment extends Fragment {
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
 
+                PolylineOptions polyOptions = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
+                polyOptions.add(new LatLng(card.getShop().getPos().getLatitude(),card.getShop().getPos().getLongitude()));
+                polyOptions.add(new LatLng(userPos.getLatitude(),userPos.getLongitude()));
 
                 // For dropping a marker at a point on the Map
                 LatLng shopLatLng = new LatLng(card.getShop().getPos().getLatitude(), card.getShop().getPos().getLongitude());
@@ -60,7 +65,7 @@ public class MapFragment extends Fragment {
                 shopMarker.showInfoWindow();
                 LatLng userLatLng = new LatLng(userPos.getLatitude(),userPos.getLongitude());
                 googleMap.addMarker(new MarkerOptions().position(userLatLng).title(getResources().getString(R.string.youarehere)));
-
+                googleMap.addPolyline(polyOptions);
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(userLatLng).zoom(15).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
