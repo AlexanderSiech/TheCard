@@ -60,6 +60,8 @@ import com.finkevolution.thecard.Objects.LatLong;
 import com.finkevolution.thecard.R;
 import com.finkevolution.thecard.ShopsAdapter;
 import com.finkevolution.thecard.UserAdapter;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.NFC
     };
     private static final String[] CAMERA_PERMS = {
-            Manifest.permission.READ_CONTACTS
+            Manifest.permission.CAMERA
     };
     private static final String[] LOCATION_PERMS = {
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -181,8 +183,9 @@ public class MainActivity extends AppCompatActivity {
         showAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userCardAdapter = new UserAdapter(userCardList);
-                userCardRecycler.setAdapter(userCardAdapter);
+              //  userCardAdapter = new UserAdapter(userCardList);
+              //  userCardRecycler.setAdapter(userCardAdapter);
+                startQRScan();
             }
         });
 
@@ -285,79 +288,6 @@ public class MainActivity extends AppCompatActivity {
         return MainActivity.context;
     }
 
-    /**
-     public void inflateStub(){
-     final ViewStub stub = new ViewStub(this);
-     final int[] touched = {0};
-     stub.setLayoutResource(R.layout.testinflate);
-     stub.setInflatedId(stub.generateViewId());
-
-
-     final int inflatedId = stub.getInflatedId();
-     final DrawerLayout dl = (DrawerLayout) findViewById(R.id.drawer_layout);
-     dl.addView(stub);
-
-     final View inflated = stub.inflate();
-     final ImageButton outOfBound = (ImageButton) findViewById(R.id.imageButton);
-     final LinearLayout v = (LinearLayout) findViewById(inflatedId);
-     final Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slideup);
-
-
-
-     slideUp.setAnimationListener(new Animation.AnimationListener() {
-    @Override public void onAnimationStart(Animation animation) {
-    enableViews(findViewById(R.id.main_layout),true,true);
-    mAdapter.isClickable = true;
-    v.removeView(outOfBound);
-    }
-
-    @Override public void onAnimationEnd(Animation animation) {
-    dl.removeView(stub);
-    stub.setVisibility(View.GONE);
-    }
-
-    @Override public void onAnimationRepeat(Animation animation) {
-
-    }
-    });
-
-     outOfBound.setOnTouchListener(new View.OnTouchListener() {
-    @Override public boolean onTouch(View view, MotionEvent motionEvent) {
-    if(touched[0] == 0) {
-    inflated.startAnimation(slideUp);
-    }
-
-    touched[0]++;
-    return false;
-    }
-    });
-
-
-     Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidedown);
-     inflated.startAnimation(slide);
-     enableViews(findViewById(R.id.main_layout),false,false);
-     mAdapter.isClickable = false;
-     }
-
-     private void enableViews(View v, boolean enabled, final boolean scroll) {
-     if (v instanceof ViewGroup) {
-     ViewGroup vg = (ViewGroup) v;
-     for (int i = 0;i<vg.getChildCount();i++) {
-     enableViews(vg.getChildAt(i), enabled,scroll);
-     }
-     }
-     v.setEnabled(enabled);
-
-     mLinearLayoutManager = new LinearLayoutManager(this){
-    @Override public boolean canScrollVertically() {
-    return scroll;
-    }
-    };
-     mRecyclerView.setLayoutManager(mLinearLayoutManager);
-     }
-
-     **/
-
     public void setFragment(Fragment fragment, boolean backstack) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -368,6 +298,7 @@ public class MainActivity extends AppCompatActivity {
         }
         ft.commit();
     }
+
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void expandFragment(ImageView sharedImageView, Fragment fragment) {
@@ -406,16 +337,38 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void startQRScan(){
+        Intent scanCode = new Intent(this,QRScanner.class);
+        startActivityForResult(scanCode,0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 0) {
+            if (requestCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    Barcode barcode = data.getParcelableExtra("barcode");
+                    Toast.makeText(this,barcode.displayValue+ " ",Toast.LENGTH_SHORT).show();
+                }
+
+            }else{
+                    Toast.makeText(this,getString(R.string.codenotfound), Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     //-------------------------- Permission section
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        Log.d("Result is", requestCode + " Location is");
+        Log.d("Result is", requestCode + " Camera Request is " + hasPermission(Manifest.permission.CAMERA));
         switch (requestCode) {
             case CAMERA_REQUEST:
                 if (canAccessCamera()) {
                     //  doCameraThing();
+                    Log.d("PERMSSION CAMERA", " GRANTED");
                 } else {
                     //  bzzzt();
                 }
@@ -460,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(!canAccessLocation()){
             requestPermissions(LOCATION_PERMS,LOCATION_REQUEST);
-            Log.d("Permission", "Location");
+            Log.d("PermissionCheck", "Location");
         }else{
             requestLocation();
         }
@@ -468,12 +421,12 @@ public class MainActivity extends AppCompatActivity {
 
         if(!canAccessNFC()){
             requestPermissions(NFC_PERMS,NFC_REQUEST);
-            Log.d("Permission", "NFC");
+            Log.d("PermissionCheck", "NFC");
         }
 
         if(!canAccessCamera()){
             requestPermissions(CAMERA_PERMS,CAMERA_REQUEST);
-            Log.d("Permission", "CAMERA");
+            Log.d("PermissionCheck", "CAMERA");
         }
 
         if (!NfcAdapter.getDefaultAdapter(this).isEnabled())
@@ -500,11 +453,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public boolean checkCameraPermission(){
+        if(!canAccessCamera()){
+            return false;
+        }else
+            return true;
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void requestCameraPermission(){
+        requestPermissions(CAMERA_PERMS,CAMERA_REQUEST);
+    }
+
+
+
     //For updating location
     @TargetApi(Build.VERSION_CODES.M)
     public void requestLocation(){
         requestPermissions(LOCATION_PERMS,LOCATION_REQUEST);
     }
+
 
 
 

@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 
 import com.finkevolution.thecard.Controller;
 import com.finkevolution.thecard.ExpandedFragments.ContactFragment;
@@ -226,6 +225,7 @@ public class ExpandedFragment extends Fragment {
         ft.commit();
     }
 
+
     public void changeClickable(){
 
         switch (current){
@@ -270,6 +270,10 @@ public class ExpandedFragment extends Fragment {
 
     public void setController(Controller controller){
         this.controller = controller;
+    }
+
+    public boolean checkCameraPermission(){
+        return controller.checkCameraPermission();
     }
 
 

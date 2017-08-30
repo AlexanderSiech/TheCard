@@ -134,6 +134,14 @@ public class Controller {
         mainActivity.requestLocation();
     }
 
+    public boolean checkCameraPermission(){
+        return mainActivity.checkCameraPermission();
+    }
+
+    public void requestCameraPermission(){
+        mainActivity.requestCameraPermission();
+    }
+
 
     public void setUserLatLong(LatLong userLatLong){
         this.userLatLong = userLatLong;

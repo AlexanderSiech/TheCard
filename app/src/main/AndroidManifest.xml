@@ -5,6 +5,10 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-permission android:name="android.permission.CAMERA" ></uses-permission>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-feature android:name="android.hardware.nfc" android:required="false"></uses-feature>
     <uses-permission android:name="android.permission.NFC" />
 
@@ -57,6 +61,7 @@
         </activity>
         <activity android:name=".Activites.StartActivity"></activity>
         <activity android:name=".Activites.NearMeActivity"></activity>
+        <activity android:name=".Activites.QRScanner"></activity>
 
 
 
