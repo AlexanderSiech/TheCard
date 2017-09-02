@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.finkevolution.thecard.Activites.CardlistFragment;
 import com.finkevolution.thecard.Activites.ExpandedFragment;
@@ -52,7 +53,6 @@ public class Controller {
         checkUserCard();
         retrieveUserFavorites();
         setupListFragment();
-       // retrieveLocation();
         new TestRunner(user, shops);
 
     }
@@ -119,13 +119,6 @@ public class Controller {
         mainActivity.expandFragment(imageView, expandedFragment);
     }
 
-
-    /**
-     public void inflateStub(){
-     mainActivity.inflateStub();
-     }
-     **/
-
     public void resolveIntent(Intent intent) {
         nfcManager.resolveIntent(intent);
     }
@@ -149,6 +142,7 @@ public class Controller {
     }
 
     public LatLong getUserPosition(){
+        Toast.makeText(mainActivity,"Returning Position " + userLatLong.getLatitude() + " and " + userLatLong.getLongitude(), Toast.LENGTH_SHORT).show();
         return userLatLong;
     }
 

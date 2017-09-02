@@ -62,9 +62,12 @@ public class QRScanner extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
                 try {
-                    //TODO Sätt ditt permissioncheck
-//                    controller.checkCameraPermission();
-                    cameraSource.start(cameraView.getHolder());
+
+                    if(controller.checkCameraPermission()) {
+                        cameraSource.start(cameraView.getHolder());
+                    }else {
+                        controller.requestCameraPermission();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

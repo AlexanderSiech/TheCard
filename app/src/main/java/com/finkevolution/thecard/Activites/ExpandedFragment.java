@@ -97,6 +97,12 @@ public class ExpandedFragment extends Fragment {
         return v;
     }
 
+
+    /**
+     * Needed Override to used shared element
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -113,6 +119,9 @@ public class ExpandedFragment extends Fragment {
     }
 
 
+    /**
+     * Method to set fragment to show Information of the shop
+     */
     public void setInfoFragment(){
         Bundle cardBundle = new Bundle();
         cardBundle.putSerializable("card",card);
@@ -135,6 +144,9 @@ public class ExpandedFragment extends Fragment {
         ft.commit();
     }
 
+    /**
+     * Method to set fragment to show "Klipp"- offer from the shop
+     */
     public void setKlippFragment(){
         Bundle cardBundle = new Bundle();
         cardBundle.putSerializable("card",card);
@@ -158,6 +170,9 @@ public class ExpandedFragment extends Fragment {
         ft.commit();
     }
 
+    /**
+     * Method to set fragment to show openhours for the shop
+     */
     public void setOpenFragment(){
         Bundle cardBundle = new Bundle();
         cardBundle.putSerializable("card",card);
@@ -181,6 +196,9 @@ public class ExpandedFragment extends Fragment {
         ft.commit();
     }
 
+    /**
+     * Method to set fragment to show a map and location of the shop
+     */
     public void setMapFragment(){
         Bundle cardBundle = new Bundle();
         cardBundle.putSerializable("card",card);
@@ -204,6 +222,9 @@ public class ExpandedFragment extends Fragment {
         ft.commit();
     }
 
+    /**
+     * Method to set fragment to show contact information to the shop
+     */
     public void setContactFragment(){
         Bundle cardBundle = new Bundle();
         cardBundle.putSerializable("card",card);
@@ -226,6 +247,9 @@ public class ExpandedFragment extends Fragment {
     }
 
 
+    /**
+     * Method that disables and enables buttons depending on which fragment that is shown
+     */
     public void changeClickable(){
 
         switch (current){
@@ -268,13 +292,12 @@ public class ExpandedFragment extends Fragment {
     }
 
 
+    /**
+     * Method that sets the controller
+     * @param controller
+     */
     public void setController(Controller controller){
         this.controller = controller;
     }
-
-    public boolean checkCameraPermission(){
-        return controller.checkCameraPermission();
-    }
-
 
 }

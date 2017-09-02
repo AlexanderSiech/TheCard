@@ -28,6 +28,7 @@ import android.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -68,7 +69,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    //GÖR OM private ArrayList<Photo> mPhotosList;
     private ArrayList<Card> shopList, userCardList, favoriteList;
     private RecyclerView mRecyclerView, userCardRecycler;
     private LinearLayoutManager mLinearLayoutManager, userLinearLayoutManager;
@@ -81,8 +81,9 @@ public class MainActivity extends AppCompatActivity {
     private LatLong userLatLong;
     private NfcAdapter nfcAdapter;
     private NfcManager nfcManager;
+    private SwipeRefreshLayout swipeContainer;
 
-    //Permissions -----
+    //Permissions ----- To access runtime permission
     private static final String[] INITIAL_PERMS = {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.NFC,
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         postponeEnterTransition();
         //   getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         initialize();
+        initiateSwipe();
         checkLaunchType(i);
         checkAllPermissions();
 
@@ -145,8 +147,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Check Intent launch type to determine what to happend on sense, for example NFC launch
+     * @param intent
+     */
     private void checkLaunchType(Intent intent) {
         if (intent.getAction() == NfcAdapter.ACTION_NDEF_DISCOVERED) {
+            //TODO Fixa stamp collect när funk finns
             //controller.resolveIntent(intent);
         }
     }
@@ -198,6 +205,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Swipe section enables refresh on swipe down, to update the users position
+     */
+
+    public void initiateSwipe(){
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+    }
+
+
     /**
      * Setup customized Toolbar
      */
@@ -210,13 +238,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         getWindow().setStatusBarColor(Color.BLACK);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // requestPhoto(); // hämtar en bild
-        //fixar i ImageRequester
     }
 
 
@@ -284,10 +305,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Method that retuns Acitivy Context static
+     * @return
+     */
     public static Context getContext() {
         return MainActivity.context;
     }
 
+    /**
+     * Method that allows to set a different fragment to main layout
+     * @param fragment
+     * @param backstack
+     */
     public void setFragment(Fragment fragment, boolean backstack) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -300,6 +330,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Method that changes fragment to "Expanding the new fragment on shop click"
+     * @param sharedImageView The shared element to view
+     * @param fragment Fragment to set
+     */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void expandFragment(ImageView sharedImageView, Fragment fragment) {
         FragmentManager fm = getFragmentManager();
@@ -312,12 +347,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * On new intent detected
+     * @param intent
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         controller.resolveIntent(intent);
     }
 
+    /**
+     * OnResume sets NFC to be enabled on foreground dispatch.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -328,6 +370,9 @@ public class MainActivity extends AppCompatActivity {
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
     }
 
+    /**
+     * OnPause disables NFC for foreground dispatch
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -337,11 +382,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method that starts the camera for Barcode scanning
+     */
     public void startQRScan(){
         Intent scanCode = new Intent(this,QRScanner.class);
         startActivityForResult(scanCode,0);
     }
 
+    /**
+     * Result from the started actitvity this is used for the Barcode scanning
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 0) {
@@ -358,6 +412,8 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
 
     //-------------------------- Permission section
 
@@ -389,25 +445,41 @@ public class MainActivity extends AppCompatActivity {
                     retrieveLocation();
                 } else {
                     // bzzzt();
-                    Log.d("DENIED", "NO ACCESS TO LOCATION");
+                //    Log.d("DENIED", "NO ACCESS TO LOCATION");
+                    Toast.makeText(this,"Location Update Denied",Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
 
 
+    /**
+     * Method to check if application can access user location
+     * @return
+     */
     private boolean canAccessLocation() {
         return (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
     }
 
+    /**
+     * Method that checks if application can access camera
+     * @return
+     */
     private boolean canAccessCamera() {
         return (hasPermission(Manifest.permission.CAMERA));
     }
 
+    /**
+     * Method that checks if user has enabled NFC
+     * @return
+     */
     private boolean canAccessNFC() {
         return (hasPermission(Manifest.permission.NFC));
     }
 
+    /**
+     * Method that checks all permissions on application start
+     */
     @TargetApi(Build.VERSION_CODES.M)
     private void checkAllPermissions(){
 
@@ -436,16 +508,56 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to check permission
+     * @param perm Permission to check
+     * @return
+     */
     @TargetApi(Build.VERSION_CODES.M)
     private boolean hasPermission(String perm) {
         return (PackageManager.PERMISSION_GRANTED == checkSelfPermission(perm));
     }
 
+    /**
+     * Method that retrieves the users location
+     */
     @TargetApi(Build.VERSION_CODES.M)
     public void retrieveLocation() {
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                controller.setUserLatLong(new LatLong(location.getLongitude(),location.getLatitude()));
+                Toast.makeText(getContext(), "Location Updated! " , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        String provider = locationManager.getBestProvider(criteria, true);
+        Location location = locationManager.getLastKnownLocation(provider);
+        locationManager.requestLocationUpdates(provider,99999999,50,locationListener);
+
         userLatLong = new LatLong(location.getLongitude(),location.getLatitude());
 
         controller.setUserLatLong(userLatLong);
@@ -453,6 +565,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Method that checks camera permission
+     * @return
+     */
     public boolean checkCameraPermission(){
         if(!canAccessCamera()){
             return false;
@@ -460,20 +576,31 @@ public class MainActivity extends AppCompatActivity {
             return true;
     }
 
+    /**
+     * Method that request application access to the camera
+     */
     @TargetApi(Build.VERSION_CODES.M)
     public void requestCameraPermission(){
         requestPermissions(CAMERA_PERMS,CAMERA_REQUEST);
     }
 
 
-
-    //For updating location
+    /**
+     * Method for requesting/updating user location
+     */
     @TargetApi(Build.VERSION_CODES.M)
     public void requestLocation(){
         requestPermissions(LOCATION_PERMS,LOCATION_REQUEST);
     }
 
-
+    /**
+     * Method that is called when refresh swipe is called
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    public void refresh(){
+        requestPermissions(LOCATION_PERMS,LOCATION_REQUEST);
+        swipeContainer.setRefreshing(false);
+    }
 
 
 }

@@ -60,7 +60,6 @@
 
         </activity>
         <activity android:name=".Activites.StartActivity"></activity>
-        <activity android:name=".Activites.NearMeActivity"></activity>
         <activity android:name=".Activites.QRScanner"></activity>
 
 

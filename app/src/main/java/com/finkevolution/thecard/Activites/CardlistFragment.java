@@ -34,9 +34,6 @@ public class CardlistFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.app_main_fragment, container, false);
         shopList = (ArrayList<Card>) getArguments().getSerializable("cardlist");
-
-
-
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
