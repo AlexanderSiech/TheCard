@@ -1,7 +1,6 @@
 package com.finkevolution.thecard.Objects;
 
 import com.finkevolution.thecard.Activites.MainActivity;
-import com.mongodb.gridfs.GridFSDBFile;
 
 import java.io.Serializable;
 
@@ -14,7 +13,7 @@ public class Shop implements Serializable{
     int stampcount;
     LatLong pos;
     OpenHours openHours;
-    GridFSDBFile logo,stampImg,cardImg;
+   // GridFSDBFile logo,stampImg,cardImg;
 
     int imgSource;
 
@@ -66,6 +65,8 @@ public class Shop implements Serializable{
         pos = new LatLong(longitude,latitude);
     }
 
+/**
+ * TODO Fixa Rätt Source
     public void setLogo(GridFSDBFile logo){
         this.logo = logo;
     }
@@ -90,6 +91,7 @@ public class Shop implements Serializable{
         return logo;
     }
 
+ **/
     public OpenHours getOpenHours() {
         return openHours;
     }

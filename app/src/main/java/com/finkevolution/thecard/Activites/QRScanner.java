@@ -63,11 +63,7 @@ public class QRScanner extends AppCompatActivity {
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
                 try {
 
-                    if(controller.checkCameraPermission()) {
                         cameraSource.start(cameraView.getHolder());
-                    }else {
-                        controller.requestCameraPermission();
-                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -103,10 +99,6 @@ public class QRScanner extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public void setController(Controller controller){
-        this.controller = controller;
     }
 
 

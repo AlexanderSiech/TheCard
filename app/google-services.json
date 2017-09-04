@@ -1,33 +1,35 @@
 {
   "project_info": {
-    "project_number": "725498744251",
-    "project_id": "firebase-klippkortet"
+    "project_number": "228692760835",
+    "firebase_url": "https://klippkortet-12d00.firebaseio.com",
+    "project_id": "klippkortet-12d00",
+    "storage_bucket": "klippkortet-12d00.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:725498744251:android:bd6fee46632bd8f7",
+        "mobilesdk_app_id": "1:228692760835:android:bd6fee46632bd8f7",
         "android_client_info": {
           "package_name": "com.finkevolution.thecard"
         }
       },
       "oauth_client": [
         {
-          "client_id": "725498744251-21euqq8n7gpldfk72lt8o6lj0is5ujmq.apps.googleusercontent.com",
+          "client_id": "228692760835-5l36ld9scb004818vu0ncjh2s2i6nqjb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.finkevolution.thecard",
-            "certificate_hash": "54329f4fb19746d811a5fef5f16bf68bdacb5c58"
+            "certificate_hash": "a7ad8080db78adb731fd66f76ce9cee662bcc296"
           }
         },
         {
-          "client_id": "725498744251-uj9th6334g8omipvve05ns0sism0mjla.apps.googleusercontent.com",
+          "client_id": "228692760835-t25gaas33d5ivd4apqiu3alqbq5p9qvi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCeBAe_2b9WxqBkHrTk-c1B5zdvZALv5Cw"
+          "current_key": "AIzaSyB57GIoO5di0-h-gYGB4cn2SA1lGJuCX9o"
         }
       ],
       "services": {
@@ -35,11 +37,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228692760835-t25gaas33d5ivd4apqiu3alqbq5p9qvi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

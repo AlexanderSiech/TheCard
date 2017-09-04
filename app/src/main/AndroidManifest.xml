@@ -53,13 +53,13 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
 
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
-            <category android:name="android.intent.category.LAUNCHER"/>
-        </intent-filter>
-
         </activity>
-        <activity android:name=".Activites.StartActivity"></activity>
+        <activity android:name=".Activites.StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".Activites.QRScanner"></activity>
 
 

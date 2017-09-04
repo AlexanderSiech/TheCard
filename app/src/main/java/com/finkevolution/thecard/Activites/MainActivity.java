@@ -386,8 +386,12 @@ public class MainActivity extends AppCompatActivity {
      * Method that starts the camera for Barcode scanning
      */
     public void startQRScan(){
-        Intent scanCode = new Intent(this,QRScanner.class);
-        startActivityForResult(scanCode,0);
+        if(controller.checkCameraPermission()) {
+            Intent scanCode = new Intent(this,QRScanner.class);
+            startActivityForResult(scanCode,0);
+        }else {
+            controller.requestCameraPermission();
+        }
     }
 
     /**
